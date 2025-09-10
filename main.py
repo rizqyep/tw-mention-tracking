@@ -1,14 +1,11 @@
 import re
 from src.xapi.xapi import X
 from src.logger import logger
-from datetime import datetime
 import json
 import urllib.parse
 import tweepy
-import asyncio
 from twscrape import API, Tweet, gather
 import tweetdb
-import requests
 
 global api
 api = API()
@@ -360,7 +357,7 @@ def generate_content(input_tweet: str):
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant that generates short, engaging replies to tweets. Keep replies under 80 characters.",
+                    "content": "You are a helpful assistant that generates short, engaging replies to tweets. Keep replies under 80 characters. if the tweet is empty or only a mention, then reply with a random cheerful words no more than 80 characters.",
                 },
                 {
                     "role": "user",

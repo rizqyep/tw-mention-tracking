@@ -6,9 +6,9 @@ from twscrape import API, Tweet, gather
 import tweetdb
 import time
 
-mention_tracked_user = "m_hovardas"
+mention_tracked_user = "aureliadotai"
 rapid_api_key = "14da4ca027msh1426d7eef136643p1f279cjsnfc7150db6cad"
-twsession = "H4sIAJaBwmgC/21SS2/iMBCuymNBlaIImtACoRsnIVB6sJIxNRTCX7ETHCfZU8QeWikLf31x4EC165M9+l4z49dDhF1vpXnRGnaHX+WB7bMkjTkTlURNRsYQz/yN2+w3nmy9MQ31FZu4I4ktf+Ynkr1YfnD4U96KaAgCBzylZcRkGDZ+cHu+x+Phw0v40APQ+7NhqD/5zc7jqDvw+NjESTd9NJTMmtQ8a8B6HWezdbOuGUWTVedpZNl05C92cxrSO96WzXDp5S1FUcaRQxfYo1HdQB+wA06p/+8Mugt9ermOn3tzG+4Nky2tF2u5+gE5ScVqK9fid2w0muOBmOt3Fgqhv2rdN5wevbNH3jwy2zB7doxw70HyYZto3TYG7TwZqCwEfBqARonKkaYkTokEHAu5z0msAMGWws7TXPcCESSXggd5FQRSViIgWRVmIq0E4TJjaZzt3+GGhsmFxrEUGcigkoznlXjnvMqCEFcACd8TxrKzqKItXUDezWYzKbnI+JkU8yxj+5QplIvA0fDybKBArSn1PHD0HXEiSo6Mn3Jx4pUDW8AITrz8is98wc+ncir+Wd4/V1xYR8bKL2PSm4wnxaVSXF+JECd24ieWnRjjBS8KViQ84Z/KG82QBxvtewQDb326PiaKVn5ZdOfOi7JZlNdMJWNFeREv+y7dkuN3i1qYUGRv8UxDdAF170LwecySei4R0nxwVDnmN+M919D1D/3Tdg2LojVVaq9v17Ht8KZW32iryMcOwUjhbIzQNHLqVXU+sGkMF+bP1uHtLzyHXt5rAwAA"
+twsession = "H4sIADXgwmgC/21STXPaMBR0QiDpZMbDBAyFhFAkC4eQgwZLWBCQ/4pkWf7qSUMPyYwb/nptwyFpq5PmaXff6u17PnDsoo2N+JaEh5/mILI0zlUilMyjJE5knOrSu92k9xp7r7cY9bLrvuVOH4bzH6FnsRnfH36bzyI2ICtIUK3V3rjtHHUsYE3F6/ex2+Eoore9SzyYbFoBT8fLqReI7k3f8a2bWmZLG94EdXznYqy8cU8tB+0+pLNwnT2ytfe4CuKRqybTkXV301DqxhyyJUaMNx/oEQwJNN3/neG3ZXd+uj6M7hYzcukMxHoynaw31ySnid7s063+FTmtq4ehXnStCfBJb9O+bME7Zs3u0YIPOuRpBB0/RkS9zgZg23GGnVwNay+UeGxFbEZrHwHROMpU4GuqMi2zGrDaMxIi23VPEL0iKguULCMhkrKCByVOsSh1INMgFYkvpfpEw/REqyBS40yXgawYWitSYklpqaN45fuxEjoJatraJQB9STYVsUyTLI9UlqcyymuUCwi08bpq0EQ2ZwgR2A0p5Ix+CHnM9VGWkOwJBuQozXskZK5ldUpYyjfTInTHzJQjYhJzAXlFMe8LhvmOFX+/Fee60voojvIosqMQspBFIQollXyr/YAngMjO/mrLwXuPbT9UTTPvExa6i8JcFebs01Qq5iRuei7b04+vLRphysBsj59swJakmYfM5UJFWjYLDGyPwLqsPidV1cB5r/4ZRQPjfMtqteeX8yhDvGvUsVsBGaYcYVYjZxiAOYdNgI87FnIXCFltxcsfmIqd1oIDAAA="
 
 
 def parse_cookie_json(cookie_json: str):
@@ -309,7 +309,7 @@ async def get_mentions():
         q = f"(@{mention_tracked_user}"
 
         # Use the Latest tab
-        results = await gather(api.search(q, limit=10, kv={"product": "Latest"}))
+        results = await gather(api.search(q, limit=10, kv={"product": "Top"}))
 
         for tweet in results:
             # tweet is an SNScrape-like model
@@ -380,7 +380,7 @@ import random
 
 
 def get_random_media():
-    media_ids = ["1966093305529401344"]
+    media_ids = ["1966151030372192256"]
     return random.choice(media_ids)
 
 
@@ -454,6 +454,7 @@ async def track_mention_and_reply():
         print(f"Error in track_mention_and_reply: {e}")
 
 
-import asyncio
+if __name__ == "__main__":
+    import asyncio
 
-asyncio.run(track_mention_and_reply())
+    asyncio.run(track_mention_and_reply())

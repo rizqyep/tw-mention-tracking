@@ -3,10 +3,10 @@ import requests
 import re
 import time
 
-tw_api_key = "ATc6tx4ySXkH9C7opoAjaorDn"
-tw_api_secret = "4Bwh4REmINc8B4S8OkG3Sb1UZyjMcahthkjV35R3rFIPGknRhW"
-tw_access_token = "159273014-hOv5MqDzyGTVvsTmzTg3HnxrAJEJKmio2pGwllMI"
-tw_access_secret = "DmBZp7zOuTwyvFaBeCH2XsNd8BGFMf1Il2ZH7CIbWxakD"
+tw_api_key = "fSK4IQjD8Ipg7fGey3EW3TAAL"
+tw_api_secret = "Q4iP2Mfm2U39FFCAbtd2rIzN2ZrYD0e0pPnRtqQZlmBZheXz9Z"
+tw_access_token = "1965827120837570564-ZO6ovPq7Oa75rxnrNQHYK3JR2gIRJ2"
+tw_access_secret = "sk43NOwJ570f7TpBCpAbZeWI1hrNlHHuqOIyUC6pdrLFh"
 tw_client_id = "NnROMG9WbGxCQWh5SkhVakR6LWk6MTpjaQ"
 tw_client_secret = "dLHJjOenfAkynAlG5p4YK3s0CaixNyGrmUDAF5na8vpCnAN1vP"
 

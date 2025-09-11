@@ -52,7 +52,7 @@ async def get_mentions():
         cookie_json = """[
 {
     "domain": ".x.com",
-    "expirationDate": 1757576446.250669,
+    "expirationDate": 1757589986.049571,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__cf_bm",
@@ -61,12 +61,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "T8XeKGzylHWmbp3iEKSwZjL1ubeWmEp2u7TI.g7FsIo-1757574646-1.0.1.1-FBcDHf_GdxWeB.rVwP8jgDPEGRG_HU0DcybiC1EAgJVm9d5Se6pOUUkX1.2wESSwWk9mbOVzylUQnnpEl8aweb7bT76PO7e0ZtZ_yZjUtcA",
+    "value": "M7iu8YmBuVcvW5OI_A_JpJWraPR6nkUNJPNpmn8dY6g-1757588186-1.0.1.1-pEvvvvUXH3D_BNnrbYn7fFS6GnwT7814XBIySLScuhZtoyYYlm36rfSn_hjMmxTVaZAIlIzK8P7bKpNPKTIIQR0FyydjVppj0iLt5JkJBkM",
     "id": 1
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792132176,
+    "expirationDate": 1792148661,
     "hostOnly": false,
     "httpOnly": false,
     "name": "__cuid",
@@ -220,7 +220,7 @@ async def get_mentions():
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792132176.379673,
+    "expirationDate": 1792148661.590697,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id_ads",
@@ -234,7 +234,7 @@ async def get_mentions():
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792132176.379778,
+    "expirationDate": 1792148661.590785,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id_marketing",
@@ -290,7 +290,7 @@ async def get_mentions():
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1789108181.988464,
+    "expirationDate": 1789124661.780761,
     "hostOnly": false,
     "httpOnly": false,
     "name": "twid",

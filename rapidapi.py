@@ -454,7 +454,7 @@ async def track_mention_and_reply():
         print(f"Error in track_mention_and_reply: {e}")
 
 
-if __name__ == "__main__":
-    import asyncio
+# if __name__ == "__main__":
+#     import asyncio
 
-    asyncio.run(track_mention_and_reply())
+#     asyncio.run(track_mention_and_reply())

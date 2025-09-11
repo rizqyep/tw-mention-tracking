@@ -408,7 +408,7 @@ import random
 
 
 def get_random_media():
-    media_ids = ["1966050895508262912", "1966050948851314689"]
+    media_ids = ["1966093305529401344"]
     return random.choice(media_ids)
 
 

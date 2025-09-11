@@ -9,7 +9,7 @@ global api
 api = API()
 global tdb
 tdb = tweetdb.DB()
-mention_tracked_user = "aureliadotai"
+mention_tracked_user = "m_hovardas"
 tw_client_id = "Q0pzd1ZRM1dSWXN5aTJQTjVuazA6MTpjaQ"
 tw_client_secret = "ELESYZg0qiuAbQ9giZaRNJocaVksEkoY-4JLNCPRGJjrley_HH"
 tw_api_key = "qlt7cb4OMBm4HfsKX3hOPWYpE"
@@ -302,7 +302,7 @@ async def get_mentions():
 
         print("cookies", cookies)
         await api.pool.add_account(
-            username="dickcharlie87008",
+            username="itsdevkalteng",
             password="",
             email="",
             email_password="",

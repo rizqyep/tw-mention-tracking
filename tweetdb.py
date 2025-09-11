@@ -1,8 +1,9 @@
 import sqlite3
 import time
 import json
+import os
 
-DB_PATH = "tweet.db"
+DB_PATH = os.getenv("TWEET_DB_PATH", "tweet.db")
 
 
 class DB:

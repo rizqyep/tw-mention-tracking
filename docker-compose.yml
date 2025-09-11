@@ -21,6 +21,11 @@ services:
       # OpenAI API key (if used)
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       
+      # Database settings
+      - DATABASE_URL=sqlite:///app/data/tweet.db
+      - TWEET_DB_PATH=/app/data/tweet.db
+      - OAUTH_DB_PATH=/app/data/oauth.db
+      
       # Logging level
       - LOG_LEVEL=INFO
       

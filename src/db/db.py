@@ -1,8 +1,9 @@
 import sqlite3
 import time
 import json
+import os
 
-DB_PATH = "oauth.db"
+DB_PATH = os.getenv("OAUTH_DB_PATH", "oauth.db")
 
 
 class DB:

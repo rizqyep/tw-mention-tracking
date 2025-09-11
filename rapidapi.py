@@ -326,6 +326,7 @@ async def get_mentions():
 
         print("cookies", cookies)
         await api.pool.delete_inactive()
+
         await api.pool.add_account(
             username="itsdevkalteng",
             password="",

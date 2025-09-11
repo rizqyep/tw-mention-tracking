@@ -4,19 +4,13 @@ import urllib.parse
 import tweepy
 from twscrape import API, Tweet, gather
 import tweetdb
+import time
 
 global api
 api = API()
 global tdb
 tdb = tweetdb.DB()
 mention_tracked_user = "m_hovardas"
-tw_client_id = "Q0pzd1ZRM1dSWXN5aTJQTjVuazA6MTpjaQ"
-tw_client_secret = "ELESYZg0qiuAbQ9giZaRNJocaVksEkoY-4JLNCPRGJjrley_HH"
-tw_api_key = "qlt7cb4OMBm4HfsKX3hOPWYpE"
-tw_api_secret = "rEZuTyTczhgepeC3bd133Y1l1aljpW9XTDEJU8BaeDluFss13M"
-tw_access_token = "1720376180942237696-4oNllranYyFq4vBByLZXFX7GV0pZwY"
-tw_access_secret = "gsXtTGgVicFwpmyHwGQGAtPIgyaLktascSnEp7eIOqtQ2"
-tw_bearer_token = "AAAAAAAAAAAAAAAAAAAAAI874AEAAAAAFp3xTwxpKlVb7YPO%2BSxAHjk5Zx4%3DlXkScFqxkZHLdebKXGf3HPmxqWPBhcBRnY15B9Xnbolw487yQN"
 rapid_api_key = "14da4ca027msh1426d7eef136643p1f279cjsnfc7150db6cad"
 twsession = "H4sIAJaBwmgC/21SS2/iMBCuymNBlaIImtACoRsnIVB6sJIxNRTCX7ETHCfZU8QeWikLf31x4EC165M9+l4z49dDhF1vpXnRGnaHX+WB7bMkjTkTlURNRsYQz/yN2+w3nmy9MQ31FZu4I4ktf+Ynkr1YfnD4U96KaAgCBzylZcRkGDZ+cHu+x+Phw0v40APQ+7NhqD/5zc7jqDvw+NjESTd9NJTMmtQ8a8B6HWezdbOuGUWTVedpZNl05C92cxrSO96WzXDp5S1FUcaRQxfYo1HdQB+wA06p/+8Mugt9ermOn3tzG+4Nky2tF2u5+gE5ScVqK9fid2w0muOBmOt3Fgqhv2rdN5wevbNH3jwy2zB7doxw70HyYZto3TYG7TwZqCwEfBqARonKkaYkTokEHAu5z0msAMGWws7TXPcCESSXggd5FQRSViIgWRVmIq0E4TJjaZzt3+GGhsmFxrEUGcigkoznlXjnvMqCEFcACd8TxrKzqKItXUDezWYzKbnI+JkU8yxj+5QplIvA0fDybKBArSn1PHD0HXEiSo6Mn3Jx4pUDW8AITrz8is98wc+ncir+Wd4/V1xYR8bKL2PSm4wnxaVSXF+JECd24ieWnRjjBS8KViQ84Z/KG82QBxvtewQDb326PiaKVn5ZdOfOi7JZlNdMJWNFeREv+y7dkuN3i1qYUGRv8UxDdAF170LwecySei4R0nxwVDnmN+M919D1D/3Tdg2LojVVaq9v17Ht8KZW32iryMcOwUjhbIzQNHLqVXU+sGkMF+bP1uHtLzyHXt5rAwAA"
 
@@ -450,9 +444,6 @@ def create_tweet_with_rapid_api(tweet_id: str, tweet: str, media_id: str):
         return {"error": str(e)}
 
 
-import time
-
-
 async def track_mention_and_reply():
     try:
         tdb = tweetdb.DB()
@@ -491,6 +482,9 @@ async def track_mention_and_reply():
         return {"error": str(e)}
 
 
-import asyncio
+"""
+For Direct Run , use this code:
 
+import asyncio
 asyncio.run(track_mention_and_reply())
+"""

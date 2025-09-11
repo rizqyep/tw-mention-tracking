@@ -21,20 +21,14 @@ services:
       # OpenAI API key (if used)
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       
-      # Database settings
-      - DATABASE_URL=sqlite:///app/tweet.db
-      
       # Logging level
       - LOG_LEVEL=INFO
       
     volumes:
-      # Persist database and logs
+      # Persist database and logs in data directory
       - ./data:/app/data
       - ./logs:/app/logs
       - ./medias:/app/medias
-      - ./tweet.db:/app/tweet.db
-      - ./accounts.db:/app/accounts.db
-      - ./oauth.db:/app/oauth.db
       
     # Resource limits
     deploy:
@@ -62,4 +56,3 @@ volumes:
 networks:
   default:
     name: mention-tracker-network
-

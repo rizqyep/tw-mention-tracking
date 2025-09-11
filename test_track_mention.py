@@ -1,6 +1,4 @@
 import re
-from src.xapi.xapi import X
-from src.logger import logger
 import json
 import urllib.parse
 import tweepy
@@ -11,7 +9,7 @@ global api
 api = API()
 global tdb
 tdb = tweetdb.DB()
-mention_tracked_user = "itsdevkalteng"
+mention_tracked_user = "aureliadotai"
 tw_client_id = "Q0pzd1ZRM1dSWXN5aTJQTjVuazA6MTpjaQ"
 tw_client_secret = "ELESYZg0qiuAbQ9giZaRNJocaVksEkoY-4JLNCPRGJjrley_HH"
 tw_api_key = "qlt7cb4OMBm4HfsKX3hOPWYpE"
@@ -322,6 +320,7 @@ async def get_mentions():
             print(
                 f"Sender {tweet.user.username} is replying to {mention_tracked_user} with tweet id {tweet.id}"
             )
+            print(f"In reply to tweet id: {tweet.inReplyToTweetIdStr}")
             print("Content: ", tweet.rawContent)
 
         return results
@@ -329,170 +328,7 @@ async def get_mentions():
         return {"error": str(e)}
 
 
-async def reply_mention(tweepy_api: tweepy.API, tweet_id: str, reply_text: str):
-    try:
-        tweepy_api.update_status(status=reply_text, in_reply_to_status_id=tweet_id)
-    except Exception as e:
-        print({"error": str(e)})
-        return {"error": str(e)}
+import asyncio
 
-
-global x
-x = None
-
-
-from openai import OpenAI
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-
-def generate_content(input_tweet: str):
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant that generates short, engaging replies to tweets. Keep replies under 80 characters. if the tweet is empty or only a mention, then reply with a random cheerful words no more than 80 characters.",
-                },
-                {
-                    "role": "user",
-                    "content": f"Generate a reply to the following tweet: {input_tweet}",
-                },
-            ],
-            max_tokens=50,
-            temperature=0.7,
-        )
-
-        content = response.choices[0].message.content
-        return content.strip() if content else "Thanks for the mention! 🙏"
-    except Exception as e:
-        print(f"Error generating content: {e}")
-        raise e
-
-
-def get_tweet_id_from_mentioned_tweet(mentioned_tweet: Tweet):
-    tweet_id = None
-    if mentioned_tweet.inReplyToTweetIdStr:
-        tweet_id = mentioned_tweet.inReplyToTweetIdStr
-    elif mentioned_tweet.id_str:
-        tweet_id = mentioned_tweet.id_str
-    else:
-        tweet_id = None
-    return tweet_id
-
-
-def upload_media():
-    import os
-    import random
-    import glob
-
-    try:
-        tweepy_auth = tweepy.OAuth1UserHandler(
-            consumer_key=tw_api_key,
-            consumer_secret=tw_api_secret,
-            access_token=tw_access_token,
-            access_token_secret=tw_access_secret,
-        )
-        tweepy_api = tweepy.API(tweepy_auth)
-
-        # Create medias folder if it doesn't exist
-        medias_folder = "medias"
-        if not os.path.exists(medias_folder):
-            os.makedirs(medias_folder)
-            print(
-                f"Created {medias_folder} folder. Please add some media files (jpg, png, gif, mp4) to it."
-            )
-            return []
-
-        # Get all media files from the medias folder
-        media_extensions = ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.mp4", "*.mov"]
-        media_files = []
-        for ext in media_extensions:
-            media_files.extend(glob.glob(os.path.join(medias_folder, ext)))
-            media_files.extend(glob.glob(os.path.join(medias_folder, ext.upper())))
-
-        if not media_files:
-            print(
-                f"No media files found in {medias_folder} folder. Please add some media files."
-            )
-            return []
-
-        # Select a random media file
-        selected_media = random.choice(media_files)
-        print(f"Selected media: {selected_media}")
-
-        # Get file extension to determine media type
-        file_ext = os.path.splitext(selected_media)[1].lower()
-
-        # Upload the selected media file with proper media type
-        if file_ext in [".jpg", ".jpeg", ".png"]:
-            # For images, use simple_upload
-            post = tweepy_api.simple_upload(selected_media)
-        elif file_ext in [".gif"]:
-            # For GIFs, use simple_upload (they're treated as images)
-            post = tweepy_api.simple_upload(selected_media)
-        elif file_ext in [".mp4", ".mov"]:
-            # For videos, use media_upload without chunked upload for smaller files
-            file_size = os.path.getsize(selected_media)
-            if file_size > 15 * 1024 * 1024:  # 15MB threshold
-                post = tweepy_api.media_upload(selected_media, chunked=True)
-            else:
-                post = tweepy_api.media_upload(selected_media)
-        else:
-            print(f"Unsupported file type: {file_ext}")
-            return []
-
-        text = str(post)
-        media_id = re.search("media_id=(.+?),", text).group(1)
-        print(f"Successfully uploaded media with ID: {media_id}")
-        return ["{}".format(media_id)]
-    except Exception as e:
-        print(f"Error uploading media: {e}")
-        return []
-
-
-async def track_mention_and_reply(x_client=None):
-    try:
-        tdb = tweetdb.DB()
-        tdb.connect()
-        tdb.setup_database()
-
-        # Use provided client or create a new one
-        if x_client is None:
-            x_client = X()
-
-        # Format the time in a friendly string format (e.g., "2025-02-23 14:30:00")
-        print("getting mentions")
-        mentioned_tweets = await get_mentions()
-
-        for mentioned_tweet in mentioned_tweets:
-            tweet_id = get_tweet_id_from_mentioned_tweet(mentioned_tweet)
-            if tweet_id == None:
-                print("No tweet ID found to reply to")
-                return
-            if tdb.get_replied_tweet_id_by_tweet_id(tweet_id):
-                print("Tweet already replied to")
-                return
-
-            comment = generate_content(mentioned_tweet.rawContent)
-            print(f"Generated comment: {comment}")
-            print("replying to tweet")
-
-            print("uploading media")
-            media_ids = upload_media()
-
-            x_client.reply_to_tweet(
-                tweet_id,
-                comment,
-                media_ids,
-            )
-
-            tdb.store_replied_tweet_id(tweet_id)
-
-    except Exception as e:
-        return {"error": str(e)}
+if __name__ == "__main__":
+    asyncio.run(get_mentions())

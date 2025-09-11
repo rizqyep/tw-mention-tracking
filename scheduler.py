@@ -16,7 +16,7 @@ current_dir = Path(__file__).parent
 sys.path.insert(0, str(current_dir))
 
 # Import the main functions
-from main import track_mention_and_reply, X
+from rapidapi import track_mention_and_reply
 import tweetdb
 
 # Set up logging
@@ -37,11 +37,8 @@ def run_mention_tracking():
         tdb = tweetdb.DB()
         tdb.setup_database()
 
-        # Initialize X API client
-        x = X()
-
         # Run the main function with the X client
-        asyncio.run(track_mention_and_reply(x))
+        asyncio.run(track_mention_and_reply())
 
         logger.info("Mention tracking job completed successfully")
 

@@ -1,6 +1,4 @@
 import re
-from src.xapi.xapi import X
-from src.logger import logger
 import json
 import urllib.parse
 import tweepy
@@ -11,7 +9,7 @@ global api
 api = API()
 global tdb
 tdb = tweetdb.DB()
-mention_tracked_user = "itsdevkalteng"
+mention_tracked_user = "m_hovardas"
 tw_client_id = "Q0pzd1ZRM1dSWXN5aTJQTjVuazA6MTpjaQ"
 tw_client_secret = "ELESYZg0qiuAbQ9giZaRNJocaVksEkoY-4JLNCPRGJjrley_HH"
 tw_api_key = "qlt7cb4OMBm4HfsKX3hOPWYpE"
@@ -19,6 +17,8 @@ tw_api_secret = "rEZuTyTczhgepeC3bd133Y1l1aljpW9XTDEJU8BaeDluFss13M"
 tw_access_token = "1720376180942237696-4oNllranYyFq4vBByLZXFX7GV0pZwY"
 tw_access_secret = "gsXtTGgVicFwpmyHwGQGAtPIgyaLktascSnEp7eIOqtQ2"
 tw_bearer_token = "AAAAAAAAAAAAAAAAAAAAAI874AEAAAAAFp3xTwxpKlVb7YPO%2BSxAHjk5Zx4%3DlXkScFqxkZHLdebKXGf3HPmxqWPBhcBRnY15B9Xnbolw487yQN"
+rapid_api_key = "14da4ca027msh1426d7eef136643p1f279cjsnfc7150db6cad"
+twsession = "H4sIAJaBwmgC/21SS2/iMBCuymNBlaIImtACoRsnIVB6sJIxNRTCX7ETHCfZU8QeWikLf31x4EC165M9+l4z49dDhF1vpXnRGnaHX+WB7bMkjTkTlURNRsYQz/yN2+w3nmy9MQ31FZu4I4ktf+Ynkr1YfnD4U96KaAgCBzylZcRkGDZ+cHu+x+Phw0v40APQ+7NhqD/5zc7jqDvw+NjESTd9NJTMmtQ8a8B6HWezdbOuGUWTVedpZNl05C92cxrSO96WzXDp5S1FUcaRQxfYo1HdQB+wA06p/+8Mugt9ermOn3tzG+4Nky2tF2u5+gE5ScVqK9fid2w0muOBmOt3Fgqhv2rdN5wevbNH3jwy2zB7doxw70HyYZto3TYG7TwZqCwEfBqARonKkaYkTokEHAu5z0msAMGWws7TXPcCESSXggd5FQRSViIgWRVmIq0E4TJjaZzt3+GGhsmFxrEUGcigkoznlXjnvMqCEFcACd8TxrKzqKItXUDezWYzKbnI+JkU8yxj+5QplIvA0fDybKBArSn1PHD0HXEiSo6Mn3Jx4pUDW8AITrz8is98wc+ncir+Wd4/V1xYR8bKL2PSm4wnxaVSXF+JECd24ieWnRjjBS8KViQ84Z/KG82QBxvtewQDb326PiaKVn5ZdOfOi7JZlNdMJWNFeREv+y7dkuN3i1qYUGRv8UxDdAF170LwecySei4R0nxwVDnmN+M919D1D/3Tdg2LojVVaq9v17Ht8KZW32iryMcOwUjhbIzQNHLqVXU+sGkMF+bP1uHtLzyHXt5rAwAA"
 
 
 def parse_cookie_json(cookie_json: str):
@@ -58,7 +58,7 @@ async def get_mentions():
         cookie_json = """[
 {
     "domain": ".x.com",
-    "expirationDate": 1757521940.413251,
+    "expirationDate": 1757576446.250669,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__cf_bm",
@@ -67,12 +67,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "H_iD4MzcIdpz5kQ6U8ksUixCtb3LYpgLwWogc.w5i0E-1757520140-1.0.1.1-aSh5e6OHjUzQbPx7_bo.GLRpVeIm2uOloeX3Y0cqVWeUAd7dwYo2BDI1ScZMdOd.F3I970YK.D7z3E.yd_jXruF7GUptTwWYweQ7ZqeB0C8",
+    "value": "T8XeKGzylHWmbp3iEKSwZjL1ubeWmEp2u7TI.g7FsIo-1757574646-1.0.1.1-FBcDHf_GdxWeB.rVwP8jgDPEGRG_HU0DcybiC1EAgJVm9d5Se6pOUUkX1.2wESSwWk9mbOVzylUQnnpEl8aweb7bT76PO7e0ZtZ_yZjUtcA",
     "id": 1
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792080140,
+    "expirationDate": 1792132176,
     "hostOnly": false,
     "httpOnly": false,
     "name": "__cuid",
@@ -81,12 +81,12 @@ async def get_mentions():
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "bad4ee0fba204e8d997d921ce5034bcc",
+    "value": "2d1ccd02f59c4f90bab536b6c1a37458",
     "id": 2
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792077947.928836,
+    "expirationDate": 1792131158.843245,
     "hostOnly": false,
     "httpOnly": false,
     "name": "_ga",
@@ -95,12 +95,40 @@ async def get_mentions():
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "GA1.2.1969507965.1757517948",
+    "value": "GA1.2.1195100199.1757492251",
     "id": 3
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1757604347,
+    "expirationDate": 1792131158.915865,
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "_ga_KEWZ1G5MB3",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": false,
+    "session": false,
+    "storeId": "0",
+    "value": "GS2.2.s1757571158$o2$g0$t1757571158$j60$l0$h0",
+    "id": 4
+},
+{
+    "domain": ".x.com",
+    "expirationDate": 1792131151.157801,
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "_ga_RJGMY4G45L",
+    "path": "/",
+    "sameSite": "unspecified",
+    "secure": false,
+    "session": false,
+    "storeId": "0",
+    "value": "GS2.1.s1757571149$o3$g0$t1757571151$j58$l0$h0",
+    "id": 5
+},
+{
+    "domain": ".x.com",
+    "expirationDate": 1757657558,
     "hostOnly": false,
     "httpOnly": false,
     "name": "_gid",
@@ -109,12 +137,12 @@ async def get_mentions():
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "GA1.2.1104606425.1757517948",
-    "id": 4
+    "value": "GA1.2.252191106.1757492251",
+    "id": 6
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1757590544.084566,
+    "expirationDate": 1757604605.547248,
     "hostOnly": false,
     "httpOnly": true,
     "name": "att",
@@ -123,12 +151,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "1-3WvOVGQG05fXXf9L1G8mUcvKuNpmjiUgIIBA7CSV",
-    "id": 5
+    "value": "1-iJJVnz1PUVHfRGlLEFSSnlLGdl8AB1nGl1OwfsI0",
+    "id": 7
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792064141.787368,
+    "expirationDate": 1792078204.900764,
     "hostOnly": false,
     "httpOnly": true,
     "name": "auth_token",
@@ -137,12 +165,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "29b018b8df89ca23f1ba84e1561f8b83dac54226",
-    "id": 6
+    "value": "48ba808a20bd6a85dd107fb780d819434a1abb9e",
+    "id": 8
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792064142.57962,
+    "expirationDate": 1792078205.247869,
     "hostOnly": false,
     "httpOnly": false,
     "name": "ct0",
@@ -151,12 +179,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "16ea9ddfc6479f28e77619d6d48dc09337645ee6fcc17aa009d2f1f78c7d288802c230b8972bc4cb1d4fe462435d256fe8c1279cdf2e9766c35a47eefd2247c19f015d3658685647f19b9e4c4362f7e7",
-    "id": 7
+    "value": "089dc63ab292651e38cb98f68bd9cd55d1a586528a838a24d0c45813904125a6bd8173840d2ca8382fa1cdba6ff2beb8444d4ce37a00ebec63d18a13524c3134fe5f38f94bb4f951f5ab7763c3a986f2",
+    "id": 9
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792077811.861215,
+    "expirationDate": 1792052213.139826,
     "hostOnly": false,
     "httpOnly": false,
     "name": "des_opt_in",
@@ -166,11 +194,11 @@ async def get_mentions():
     "session": false,
     "storeId": "0",
     "value": "Y",
-    "id": 8
+    "id": 10
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792052410.487723,
+    "expirationDate": 1792078160.837448,
     "hostOnly": false,
     "httpOnly": false,
     "name": "dnt",
@@ -180,11 +208,11 @@ async def get_mentions():
     "session": false,
     "storeId": "0",
     "value": "1",
-    "id": 9
+    "id": 11
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792052410.749445,
+    "expirationDate": 1792078161.237412,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id",
@@ -193,12 +221,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1%3A175749241080141695",
-    "id": 10
+    "value": "v1%3A175751816111755278",
+    "id": 12
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792080140.413022,
+    "expirationDate": 1792132176.379673,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id_ads",
@@ -207,12 +235,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1%3A175749241080141695",
-    "id": 11
+    "value": "v1%3A175751816111755278",
+    "id": 13
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792080140.413063,
+    "expirationDate": 1792132176.379778,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id_marketing",
@@ -221,12 +249,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1%3A175749241080141695",
-    "id": 12
+    "value": "v1%3A175751816111755278",
+    "id": 14
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792064141.787222,
+    "expirationDate": 1792078204.900452,
     "hostOnly": false,
     "httpOnly": true,
     "name": "kdt",
@@ -235,12 +263,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "h10kCbLkVOONgD04Vz9OFsF5w1uuS8aya8xNBWrb",
-    "id": 13
+    "value": "iAlN6pxNxwOtF6dWj22aDpJuJqmN1vRAjnVLcSwY",
+    "id": 15
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792062972.866365,
+    "expirationDate": 1792078161.156966,
     "hostOnly": false,
     "httpOnly": false,
     "name": "personalization_id",
@@ -249,12 +277,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1_4SACVvqhUJ94atIv1n6uvw==",
-    "id": 14
+    "value": "v1_igtnv8ubsdfRgtjBLMY/yA==",
+    "id": 16
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1789053731,
+    "expirationDate": 1789107194,
     "hostOnly": false,
     "httpOnly": false,
     "name": "ph_phc_TXdpocbGVeZVm5VJmAsHTMrCofBQu3e0kN8HGMNGTVW_posthog",
@@ -263,12 +291,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "%7B%22distinct_id%22%3A%2201993438-5302-7320-88b8-76c4d55ecfe7%22%2C%22%24sesid%22%3A%5B1757517730601%2C%2201993438-5301-7d81-be1e-48f6420d0851%22%2C1757517730561%5D%7D",
-    "id": 15
+    "value": "%7B%22distinct_id%22%3A%22019932b2-8b9d-7ab7-ba28-2e1059eff96f%22%2C%22%24sesid%22%3A%5B1757571194214%2C%2201993767-dd2d-760a-9cb1-035a3f76896c%22%2C1757571177773%5D%7D",
+    "id": 17
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1789056140.650653,
+    "expirationDate": 1789108181.988464,
     "hostOnly": false,
     "httpOnly": false,
     "name": "twid",
@@ -277,8 +305,8 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "u%3D1961207524385853440",
-    "id": 16
+    "value": "u%3D1720376180942237696",
+    "id": 18
 },
 {
     "domain": "x.com",
@@ -291,7 +319,7 @@ async def get_mentions():
     "session": true,
     "storeId": "0",
     "value": "en",
-    "id": 17
+    "id": 19
 }
 ]"""
         print("parsing cookie json")
@@ -303,19 +331,20 @@ async def get_mentions():
         print("adding account")
 
         print("cookies", cookies)
+        await api.pool.delete_inactive()
         await api.pool.add_account(
-            username="dickcharlie87008",
+            username="itsdevkalteng",
             password="",
             email="",
             email_password="",
             cookies=cookies,
         )
 
-        print("getting user by login")
+        print("getting target mention")
         q = f"(@{mention_tracked_user}"
 
         # Use the Latest tab
-        results = await gather(api.search(q, limit=2))
+        results = await gather(api.search(q, limit=10, kv={"product": "Latest"}))
 
         for tweet in results:
             # tweet is an SNScrape-like model
@@ -337,10 +366,6 @@ async def reply_mention(tweepy_api: tweepy.API, tweet_id: str, reply_text: str):
         return {"error": str(e)}
 
 
-global x
-x = None
-
-
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
@@ -357,14 +382,13 @@ def generate_content(input_tweet: str):
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant that generates short, engaging replies to tweets. Keep replies under 80 characters. if the tweet is empty or only a mention, then reply with a random cheerful words no more than 80 characters.",
+                    "content": "You are a helpful assistant that generates short, engaging replies to tweets. Keep replies under 80 characters. if the tweet is empty or only a mention, then reply with a random cheerful words no more than 80 characters. Mix the language with natural human interaction language, no need to be strict english. make all lowercase",
                 },
                 {
                     "role": "user",
                     "content": f"Generate a reply to the following tweet: {input_tweet}",
                 },
             ],
-            max_tokens=50,
             temperature=0.7,
         )
 
@@ -386,89 +410,59 @@ def get_tweet_id_from_mentioned_tweet(mentioned_tweet: Tweet):
     return tweet_id
 
 
-def upload_media():
-    import os
-    import random
-    import glob
+import random
 
+
+def get_random_media():
+    media_ids = ["1966050895508262912", "1966050948851314689"]
+    return random.choice(media_ids)
+
+
+import requests
+
+
+def create_tweet_with_rapid_api(tweet_id: str, tweet: str, media_id: str):
     try:
-        tweepy_auth = tweepy.OAuth1UserHandler(
-            consumer_key=tw_api_key,
-            consumer_secret=tw_api_secret,
-            access_token=tw_access_token,
-            access_token_secret=tw_access_secret,
+
+        data = {
+            "tweet_text": tweet,
+            "in_reply_to_tweet_id": tweet_id,
+        }
+
+        if media_id:
+            data["media_id"] = media_id
+
+        response = requests.post(
+            "https://twttrapi.p.rapidapi.com/create-tweet",
+            data=data,
+            headers={
+                "twttr-session": twsession,
+                "x-rapidapi-key": f"{rapid_api_key}",
+                "x-rapidapi-host": "twttrapi.p.rapidapi.com",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
         )
-        tweepy_api = tweepy.API(tweepy_auth)
 
-        # Create medias folder if it doesn't exist
-        medias_folder = "medias"
-        if not os.path.exists(medias_folder):
-            os.makedirs(medias_folder)
-            print(
-                f"Created {medias_folder} folder. Please add some media files (jpg, png, gif, mp4) to it."
-            )
-            return []
-
-        # Get all media files from the medias folder
-        media_extensions = ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.mp4", "*.mov"]
-        media_files = []
-        for ext in media_extensions:
-            media_files.extend(glob.glob(os.path.join(medias_folder, ext)))
-            media_files.extend(glob.glob(os.path.join(medias_folder, ext.upper())))
-
-        if not media_files:
-            print(
-                f"No media files found in {medias_folder} folder. Please add some media files."
-            )
-            return []
-
-        # Select a random media file
-        selected_media = random.choice(media_files)
-        print(f"Selected media: {selected_media}")
-
-        # Get file extension to determine media type
-        file_ext = os.path.splitext(selected_media)[1].lower()
-
-        # Upload the selected media file with proper media type
-        if file_ext in [".jpg", ".jpeg", ".png"]:
-            # For images, use simple_upload
-            post = tweepy_api.simple_upload(selected_media)
-        elif file_ext in [".gif"]:
-            # For GIFs, use simple_upload (they're treated as images)
-            post = tweepy_api.simple_upload(selected_media)
-        elif file_ext in [".mp4", ".mov"]:
-            # For videos, use media_upload without chunked upload for smaller files
-            file_size = os.path.getsize(selected_media)
-            if file_size > 15 * 1024 * 1024:  # 15MB threshold
-                post = tweepy_api.media_upload(selected_media, chunked=True)
-            else:
-                post = tweepy_api.media_upload(selected_media)
-        else:
-            print(f"Unsupported file type: {file_ext}")
-            return []
-
-        text = str(post)
-        media_id = re.search("media_id=(.+?),", text).group(1)
-        print(f"Successfully uploaded media with ID: {media_id}")
-        return ["{}".format(media_id)]
+        print(response.json())
+        return response.json()
     except Exception as e:
-        print(f"Error uploading media: {e}")
-        return []
+        print(f"Error creating tweet with rapid api: {e}")
+        return {"error": str(e)}
 
 
-async def track_mention_and_reply(x_client=None):
+import time
+
+
+async def track_mention_and_reply():
     try:
         tdb = tweetdb.DB()
-        tdb.connect()
         tdb.setup_database()
-
-        # Use provided client or create a new one
-        if x_client is None:
-            x_client = X()
 
         # Format the time in a friendly string format (e.g., "2025-02-23 14:30:00")
         print("getting mentions")
         mentioned_tweets = await get_mentions()
+
+        mentioned_tweets = sorted(mentioned_tweets, key=lambda x: x.date, reverse=True)
 
         for mentioned_tweet in mentioned_tweets:
             tweet_id = get_tweet_id_from_mentioned_tweet(mentioned_tweet)
@@ -479,20 +473,24 @@ async def track_mention_and_reply(x_client=None):
                 print("Tweet already replied to")
                 return
 
+            print("Tweet Date: ", mentioned_tweet.date)
+
             comment = generate_content(mentioned_tweet.rawContent)
             print(f"Generated comment: {comment}")
             print("replying to tweet")
 
             print("uploading media")
-            media_ids = upload_media()
+            media_id = get_random_media()
 
-            x_client.reply_to_tweet(
-                tweet_id,
-                comment,
-                media_ids,
-            )
-
+            create_tweet_with_rapid_api(tweet_id, comment, media_id)
+            print("Tweet replied !")
             tdb.store_replied_tweet_id(tweet_id)
+            time.sleep(1)
 
     except Exception as e:
         return {"error": str(e)}
+
+
+import asyncio
+
+asyncio.run(track_mention_and_reply())

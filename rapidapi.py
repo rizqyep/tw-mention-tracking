@@ -309,7 +309,7 @@ async def get_mentions():
         q = f"(@{mention_tracked_user}"
 
         # Use the Latest tab
-        results = await gather(api.search(q, limit=10, kv={"product": "Top"}))
+        results = await gather(api.search(q, limit=10, kv={"product": "Latest"}))
 
         for tweet in results:
             # tweet is an SNScrape-like model

@@ -51,7 +51,7 @@ def main():
     logger.info("Starting mention tracking scheduler")
 
     # Schedule the job to run every 5 minutes
-    schedule.every(1).minutes.do(run_mention_tracking)
+    schedule.every(30).seconds.do(run_mention_tracking)
 
     # Alternative schedules you can use:
     # schedule.every(1).minutes.do(run_mention_tracking)  # Every minute

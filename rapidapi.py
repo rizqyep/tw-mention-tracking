@@ -349,6 +349,7 @@ async def get_mentions():
 
         return results
     except Exception as e:
+        print(f"Error in get_mentions: {e}")
         return {"error": str(e)}
 
 
@@ -479,7 +480,7 @@ async def track_mention_and_reply():
             time.sleep(1)
 
     except Exception as e:
-        return {"error": str(e)}
+        print(f"Error in track_mention_and_reply: {e}")
 
 
 """

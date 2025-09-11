@@ -31,9 +31,12 @@ services:
       
     volumes:
       # Persist database and logs in data directory
-      - ./data:/app/data
-      - ./logs:/app/logs
-      - ./medias:/app/medias
+      - data:/app/data
+      - logs:/app/logs
+      - medias:/app/medias
+      - accounts:/app/accounts
+    networks:
+      - tw-network
       
     # Resource limits
     deploy:
@@ -55,9 +58,14 @@ services:
 
 volumes:
   data:
+    driver: local 
   logs:
+    driver: local
   medias:
+    driver: local
+  accounts:
+    driver: local
 
 networks:
-  default:
-    name: mention-tracker-network
+  tw-network:
+    driver: bridge

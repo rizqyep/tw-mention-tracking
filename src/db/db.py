@@ -9,7 +9,9 @@ DB_PATH = os.getenv("OAUTH_DB_PATH", "oauth.db")
 class DB:
     def __init__(self):
         # Ensure the directory exists before creating the database
-        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+        db_dir = os.path.dirname(DB_PATH)
+        if db_dir:  # Only create directory if there is one
+            os.makedirs(db_dir, exist_ok=True)
         self.setup_database()
 
     def connect(self):
@@ -19,8 +21,10 @@ class DB:
         """Initialize the database and create necessary tables."""
         with self.connect() as conn:
             c = conn.cursor()
-            c.execute('''CREATE TABLE IF NOT EXISTS oauth_tokens
-                         (token TEXT, expires_at REAL, refresh_token TEXT)''')
+            c.execute(
+                """CREATE TABLE IF NOT EXISTS oauth_tokens
+                         (token TEXT, expires_at REAL, refresh_token TEXT)"""
+            )
             conn.commit()
 
     def store_token(self, token):
@@ -28,18 +32,21 @@ class DB:
         with self.connect() as conn:
             c = conn.cursor()
             c.execute("DELETE FROM oauth_tokens")
-            c.execute("INSERT INTO oauth_tokens \
+            c.execute(
+                "INSERT INTO oauth_tokens \
                       (token, expires_at, refresh_token) VALUES (?, ?, ?)",
-                      (json.dumps(token), token["expires_at"],
-                       token["refresh_token"]))
+                (json.dumps(token), token["expires_at"], token["refresh_token"]),
+            )
             conn.commit()
 
     def get_token(self):
         """Retrieve the latest OAuth token from the database."""
         with self.connect() as conn:
             c = conn.cursor()
-            c.execute("SELECT token FROM oauth_tokens \
-                       ORDER BY expires_at DESC LIMIT 1")
+            c.execute(
+                "SELECT token FROM oauth_tokens \
+                       ORDER BY expires_at DESC LIMIT 1"
+            )
             row = c.fetchone()
             return json.loads(row[0]) if row else None
 
@@ -54,7 +61,9 @@ class DB:
         """Retrieve the refresh token."""
         with self.connect() as conn:
             c = conn.cursor()
-            c.execute("SELECT refresh_token FROM oauth_tokens \
-                      ORDER BY expires_at DESC LIMIT 1")
+            c.execute(
+                "SELECT refresh_token FROM oauth_tokens \
+                      ORDER BY expires_at DESC LIMIT 1"
+            )
             row = c.fetchone()
             return row[0] if row else None

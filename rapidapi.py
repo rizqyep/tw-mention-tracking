@@ -6,10 +6,6 @@ from twscrape import API, Tweet, gather
 import tweetdb
 import time
 
-global api
-api = API()
-global tdb
-tdb = tweetdb.DB()
 mention_tracked_user = "m_hovardas"
 rapid_api_key = "14da4ca027msh1426d7eef136643p1f279cjsnfc7150db6cad"
 twsession = "H4sIAJaBwmgC/21SS2/iMBCuymNBlaIImtACoRsnIVB6sJIxNRTCX7ETHCfZU8QeWikLf31x4EC165M9+l4z49dDhF1vpXnRGnaHX+WB7bMkjTkTlURNRsYQz/yN2+w3nmy9MQ31FZu4I4ktf+Ynkr1YfnD4U96KaAgCBzylZcRkGDZ+cHu+x+Phw0v40APQ+7NhqD/5zc7jqDvw+NjESTd9NJTMmtQ8a8B6HWezdbOuGUWTVedpZNl05C92cxrSO96WzXDp5S1FUcaRQxfYo1HdQB+wA06p/+8Mugt9ermOn3tzG+4Nky2tF2u5+gE5ScVqK9fid2w0muOBmOt3Fgqhv2rdN5wevbNH3jwy2zB7doxw70HyYZto3TYG7TwZqCwEfBqARonKkaYkTokEHAu5z0msAMGWws7TXPcCESSXggd5FQRSViIgWRVmIq0E4TJjaZzt3+GGhsmFxrEUGcigkoznlXjnvMqCEFcACd8TxrKzqKItXUDezWYzKbnI+JkU8yxj+5QplIvA0fDybKBArSn1PHD0HXEiSo6Mn3Jx4pUDW8AITrz8is98wc+ncir+Wd4/V1xYR8bKL2PSm4wnxaVSXF+JECd24ieWnRjjBS8KViQ84Z/KG82QBxvtewQDb326PiaKVn5ZdOfOi7JZlNdMJWNFeREv+y7dkuN3i1qYUGRv8UxDdAF170LwecySei4R0nxwVDnmN+M919D1D/3Tdg2LojVVaq9v17Ht8KZW32iryMcOwUjhbIzQNHLqVXU+sGkMF+bP1uHtLzyHXt5rAwAA"
@@ -52,7 +48,7 @@ async def get_mentions():
         cookie_json = """[
 {
     "domain": ".x.com",
-    "expirationDate": 1757589986.049571,
+    "expirationDate": 1757589282.67788,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__cf_bm",
@@ -61,12 +57,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "M7iu8YmBuVcvW5OI_A_JpJWraPR6nkUNJPNpmn8dY6g-1757588186-1.0.1.1-pEvvvvUXH3D_BNnrbYn7fFS6GnwT7814XBIySLScuhZtoyYYlm36rfSn_hjMmxTVaZAIlIzK8P7bKpNPKTIIQR0FyydjVppj0iLt5JkJBkM",
+    "value": "pWuO04gF4AXn0ROdx_PvOFKKwnTZtAAGChwvj7CMmpc-1757587482-1.0.1.1-AV9iytrdGJud4EoaAwIoS3QLnqn.ZDYi_Ggv7iA.ZgKk4Es0i0eLek7Ba2Bnh9xsi7JYhAmINCueoqwRe_GnElX40xzMh3b_cCy8uXKUXy8",
     "id": 1
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792148661,
+    "expirationDate": 1792147481,
     "hostOnly": false,
     "httpOnly": false,
     "name": "__cuid",
@@ -75,12 +71,12 @@ async def get_mentions():
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "2d1ccd02f59c4f90bab536b6c1a37458",
+    "value": "bad4ee0fba204e8d997d921ce5034bcc",
     "id": 2
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792131158.843245,
+    "expirationDate": 1792077947.928836,
     "hostOnly": false,
     "httpOnly": false,
     "name": "_ga",
@@ -89,40 +85,12 @@ async def get_mentions():
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "GA1.2.1195100199.1757492251",
+    "value": "GA1.2.1969507965.1757517948",
     "id": 3
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792131158.915865,
-    "hostOnly": false,
-    "httpOnly": false,
-    "name": "_ga_KEWZ1G5MB3",
-    "path": "/",
-    "sameSite": "unspecified",
-    "secure": false,
-    "session": false,
-    "storeId": "0",
-    "value": "GS2.2.s1757571158$o2$g0$t1757571158$j60$l0$h0",
-    "id": 4
-},
-{
-    "domain": ".x.com",
-    "expirationDate": 1792131151.157801,
-    "hostOnly": false,
-    "httpOnly": false,
-    "name": "_ga_RJGMY4G45L",
-    "path": "/",
-    "sameSite": "unspecified",
-    "secure": false,
-    "session": false,
-    "storeId": "0",
-    "value": "GS2.1.s1757571149$o3$g0$t1757571151$j58$l0$h0",
-    "id": 5
-},
-{
-    "domain": ".x.com",
-    "expirationDate": 1757657558,
+    "expirationDate": 1757604347,
     "hostOnly": false,
     "httpOnly": false,
     "name": "_gid",
@@ -131,12 +99,12 @@ async def get_mentions():
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "GA1.2.252191106.1757492251",
-    "id": 6
+    "value": "GA1.2.1104606425.1757517948",
+    "id": 4
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1757604605.547248,
+    "expirationDate": 1757590544.084566,
     "hostOnly": false,
     "httpOnly": true,
     "name": "att",
@@ -145,12 +113,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "1-iJJVnz1PUVHfRGlLEFSSnlLGdl8AB1nGl1OwfsI0",
-    "id": 7
+    "value": "1-3WvOVGQG05fXXf9L1G8mUcvKuNpmjiUgIIBA7CSV",
+    "id": 5
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792078204.900764,
+    "expirationDate": 1792064141.787368,
     "hostOnly": false,
     "httpOnly": true,
     "name": "auth_token",
@@ -159,12 +127,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "48ba808a20bd6a85dd107fb780d819434a1abb9e",
-    "id": 8
+    "value": "29b018b8df89ca23f1ba84e1561f8b83dac54226",
+    "id": 6
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792078205.247869,
+    "expirationDate": 1792064142.57962,
     "hostOnly": false,
     "httpOnly": false,
     "name": "ct0",
@@ -173,12 +141,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "089dc63ab292651e38cb98f68bd9cd55d1a586528a838a24d0c45813904125a6bd8173840d2ca8382fa1cdba6ff2beb8444d4ce37a00ebec63d18a13524c3134fe5f38f94bb4f951f5ab7763c3a986f2",
-    "id": 9
+    "value": "16ea9ddfc6479f28e77619d6d48dc09337645ee6fcc17aa009d2f1f78c7d288802c230b8972bc4cb1d4fe462435d256fe8c1279cdf2e9766c35a47eefd2247c19f015d3658685647f19b9e4c4362f7e7",
+    "id": 7
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792052213.139826,
+    "expirationDate": 1792077811.861215,
     "hostOnly": false,
     "httpOnly": false,
     "name": "des_opt_in",
@@ -188,11 +156,11 @@ async def get_mentions():
     "session": false,
     "storeId": "0",
     "value": "Y",
-    "id": 10
+    "id": 8
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792078160.837448,
+    "expirationDate": 1792052410.487723,
     "hostOnly": false,
     "httpOnly": false,
     "name": "dnt",
@@ -202,11 +170,11 @@ async def get_mentions():
     "session": false,
     "storeId": "0",
     "value": "1",
-    "id": 11
+    "id": 9
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792078161.237412,
+    "expirationDate": 1792052410.749445,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id",
@@ -215,12 +183,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1%3A175751816111755278",
-    "id": 12
+    "value": "v1%3A175749241080141695",
+    "id": 10
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792148661.590697,
+    "expirationDate": 1792147481.355018,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id_ads",
@@ -229,12 +197,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1%3A175751816111755278",
-    "id": 13
+    "value": "v1%3A175749241080141695",
+    "id": 11
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792148661.590785,
+    "expirationDate": 1792147481.355134,
     "hostOnly": false,
     "httpOnly": false,
     "name": "guest_id_marketing",
@@ -243,12 +211,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1%3A175751816111755278",
-    "id": 14
+    "value": "v1%3A175749241080141695",
+    "id": 12
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792078204.900452,
+    "expirationDate": 1792064141.787222,
     "hostOnly": false,
     "httpOnly": true,
     "name": "kdt",
@@ -257,12 +225,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "iAlN6pxNxwOtF6dWj22aDpJuJqmN1vRAjnVLcSwY",
-    "id": 15
+    "value": "h10kCbLkVOONgD04Vz9OFsF5w1uuS8aya8xNBWrb",
+    "id": 13
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1792078161.156966,
+    "expirationDate": 1792062972.866365,
     "hostOnly": false,
     "httpOnly": false,
     "name": "personalization_id",
@@ -271,12 +239,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "v1_igtnv8ubsdfRgtjBLMY/yA==",
-    "id": 16
+    "value": "v1_4SACVvqhUJ94atIv1n6uvw==",
+    "id": 14
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1789107194,
+    "expirationDate": 1789053731,
     "hostOnly": false,
     "httpOnly": false,
     "name": "ph_phc_TXdpocbGVeZVm5VJmAsHTMrCofBQu3e0kN8HGMNGTVW_posthog",
@@ -285,12 +253,12 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "%7B%22distinct_id%22%3A%22019932b2-8b9d-7ab7-ba28-2e1059eff96f%22%2C%22%24sesid%22%3A%5B1757571194214%2C%2201993767-dd2d-760a-9cb1-035a3f76896c%22%2C1757571177773%5D%7D",
-    "id": 17
+    "value": "%7B%22distinct_id%22%3A%2201993438-5302-7320-88b8-76c4d55ecfe7%22%2C%22%24sesid%22%3A%5B1757517730601%2C%2201993438-5301-7d81-be1e-48f6420d0851%22%2C1757517730561%5D%7D",
+    "id": 15
 },
 {
     "domain": ".x.com",
-    "expirationDate": 1789124661.780761,
+    "expirationDate": 1789123481.479671,
     "hostOnly": false,
     "httpOnly": false,
     "name": "twid",
@@ -299,8 +267,8 @@ async def get_mentions():
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "u%3D1720376180942237696",
-    "id": 18
+    "value": "u%3D1961207524385853440",
+    "id": 16
 },
 {
     "domain": "x.com",
@@ -313,7 +281,7 @@ async def get_mentions():
     "session": true,
     "storeId": "0",
     "value": "en",
-    "id": 19
+    "id": 17
 }
 ]"""
         print("parsing cookie json")
@@ -323,17 +291,19 @@ async def get_mentions():
             return {"error": "Failed to parse cookie json"}
 
         print("adding account")
-
+        api = API()
         print("cookies", cookies)
         await api.pool.delete_inactive()
 
         await api.pool.add_account(
-            username="itsdevkalteng",
+            username="dirkcharlie87008",
             password="",
             email="",
             email_password="",
             cookies=cookies,
         )
+
+        print("account added")
 
         print("getting target mention")
         q = f"(@{mention_tracked_user}"
@@ -484,9 +454,6 @@ async def track_mention_and_reply():
         print(f"Error in track_mention_and_reply: {e}")
 
 
-"""
-For Direct Run , use this code:
-
 import asyncio
+
 asyncio.run(track_mention_and_reply())
-"""

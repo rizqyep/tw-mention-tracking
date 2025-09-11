@@ -8,6 +8,8 @@ DB_PATH = os.getenv("TWEET_DB_PATH", "tweet.db")
 
 class DB:
     def __init__(self):
+        # Ensure the directory exists before creating the database
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
         self.setup_database()
 
     def connect(self):

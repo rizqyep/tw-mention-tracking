@@ -8,6 +8,8 @@ DB_PATH = os.getenv("OAUTH_DB_PATH", "oauth.db")
 
 class DB:
     def __init__(self):
+        # Ensure the directory exists before creating the database
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
         self.setup_database()
 
     def connect(self):

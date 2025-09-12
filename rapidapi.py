@@ -851,11 +851,17 @@ def generate_content(input_tweet: str):
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant that generates short, engaging replies to tweets. Keep replies under 80 characters. if the tweet is empty or only a mention, then reply with a random cheerful words no more than 80 characters. Mix the language with natural human interaction language, no need to be strict english. make all lowercase",
+                    "content": """
+                    You are a social media specialist that will reply with short, engaging replies to tweets mentioned at you. Keep replies under 80 characters. 
+                    The tweet you are replying is directed to yourself (@aureliadotai), don't ever mention yourself in the reply.
+                    if the tweet is empty or only a mention, then reply with a random cheerful words no more than 80 characters. 
+                    Mix the language with natural human interaction language, no need to be strict english. make all lowercase
+                    
+                    """,
                 },
                 {
                     "role": "user",
-                    "content": f"Generate a reply to the following tweet: {input_tweet}",
+                    "content": f" Generate a reply to the following tweet: {input_tweet}",
                 },
             ],
             temperature=0.7,

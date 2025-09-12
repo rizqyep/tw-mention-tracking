@@ -9,7 +9,7 @@ global api
 api = API()
 global tdb
 tdb = tweetdb.DB()
-mention_tracked_user = "m_hovardas"
+mention_tracked_user = "aureliadotai"
 tw_client_id = "Q0pzd1ZRM1dSWXN5aTJQTjVuazA6MTpjaQ"
 tw_client_secret = "ELESYZg0qiuAbQ9giZaRNJocaVksEkoY-4JLNCPRGJjrley_HH"
 tw_api_key = "qlt7cb4OMBm4HfsKX3hOPWYpE"
@@ -313,7 +313,7 @@ async def get_mentions():
         q = f"(@{mention_tracked_user}"
 
         # Use the Latest tab
-        results = await gather(api.search(q, limit=2))
+        results = await gather(api.search(q, limit=10, kv={"product": "Top"}))
 
         for tweet in results:
             # tweet is an SNScrape-like model

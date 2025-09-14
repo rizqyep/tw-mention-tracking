@@ -1013,10 +1013,10 @@ async def track_mention_and_reply():
             tweet_id = get_tweet_id_from_mentioned_tweet(mentioned_tweet)
             if tweet_id == None:
                 print("No tweet ID found to reply to")
-                return
+                continue
             if tdb.get_replied_tweet_id_by_tweet_id(tweet_id):
                 print("Tweet already replied to")
-                return
+                continue
 
             print("Tweet Date: ", mentioned_tweet.date)
 

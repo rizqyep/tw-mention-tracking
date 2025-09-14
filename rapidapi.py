@@ -814,6 +814,8 @@ async def get_mentions():
         print(f"Getting mentions from {yesterday}")
         q = f"(@{mention_tracked_user}) since:{yesterday}"
 
+        results = await gather(api.search(q, limit=100, kv={"product": "Latest"}))
+
         return results
     except Exception as e:
         print(f"Error in get_mentions: {e}")

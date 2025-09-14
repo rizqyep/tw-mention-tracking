@@ -818,13 +818,6 @@ async def get_mentions():
         # Use the Latest tab
         results = await gather(api.search(q, limit=100, kv={"product": "Latest"}))
 
-        for tweet in results:
-            # tweet is an SNScrape-like model
-            print(
-                f"Sender {tweet.user.username} is replying to {mention_tracked_user} with tweet id {tweet.id}"
-            )
-            print("Content: ", tweet.rawContent)
-
         return results
     except Exception as e:
         print(f"Error in get_mentions: {e}")
@@ -1010,6 +1003,11 @@ async def track_mention_and_reply():
         mentioned_tweets = sorted(mentioned_tweets, key=lambda x: x.date, reverse=True)
 
         for mentioned_tweet in mentioned_tweets:
+            print(
+                f"Sender {mentioned_tweet.user.username} replied to {mention_tracked_user}"
+            )
+            print("Content: ", mentioned_tweet.rawContent)
+
             tweet_id = get_tweet_id_from_mentioned_tweet(mentioned_tweet)
             if tweet_id == None:
                 print("No tweet ID found to reply to")

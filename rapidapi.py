@@ -811,7 +811,7 @@ async def get_mentions():
         print("getting target mention")
 
         yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-        q = f"(@{mention_tracked_user} since:{yesterday})"
+        q = f"(@{mention_tracked_user}) since:{yesterday}"
         print(f"Getting mentions since {yesterday}")
         results = await gather(api.search(q, limit=100, kv={"product": "Latest"}))
 

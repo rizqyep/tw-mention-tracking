@@ -7,46 +7,14 @@ import tweetdb
 import time
 from datetime import datetime, timedelta
 
+
+# Credentials and target settings
 mention_tracked_user = "aureliadotai"
 rapid_api_key = "14da4ca027msh1426d7eef136643p1f279cjsnfc7150db6cad"
 twsession = "H4sIADXgwmgC/21STXPaMBR0QiDpZMbDBAyFhFAkC4eQgwZLWBCQ/4pkWf7qSUMPyYwb/nptwyFpq5PmaXff6u17PnDsoo2N+JaEh5/mILI0zlUilMyjJE5knOrSu92k9xp7r7cY9bLrvuVOH4bzH6FnsRnfH36bzyI2ICtIUK3V3rjtHHUsYE3F6/ex2+Eoore9SzyYbFoBT8fLqReI7k3f8a2bWmZLG94EdXznYqy8cU8tB+0+pLNwnT2ytfe4CuKRqybTkXV301DqxhyyJUaMNx/oEQwJNN3/neG3ZXd+uj6M7hYzcukMxHoynaw31ySnid7s063+FTmtq4ehXnStCfBJb9O+bME7Zs3u0YIPOuRpBB0/RkS9zgZg23GGnVwNay+UeGxFbEZrHwHROMpU4GuqMi2zGrDaMxIi23VPEL0iKguULCMhkrKCByVOsSh1INMgFYkvpfpEw/REqyBS40yXgawYWitSYklpqaN45fuxEjoJatraJQB9STYVsUyTLI9UlqcyymuUCwi08bpq0EQ2ZwgR2A0p5Ix+CHnM9VGWkOwJBuQozXskZK5ldUpYyjfTInTHzJQjYhJzAXlFMe8LhvmOFX+/Fee60voojvIosqMQspBFIQollXyr/YAngMjO/mrLwXuPbT9UTTPvExa6i8JcFebs01Qq5iRuei7b04+vLRphysBsj59swJakmYfM5UJFWjYLDGyPwLqsPidV1cB5r/4ZRQPjfMtqteeX8yhDvGvUsVsBGaYcYVYjZxiAOYdNgI87FnIXCFltxcsfmIqd1oIDAAA="
 
-
-def parse_cookie_json(cookie_json: str):
-    try:
-        cookies = json.loads(cookie_json)
-
-        # Step 2: Extract name=value pairs and decode URL-encoded values
-        cookie_pairs = []
-        for cookie in cookies:
-            name = cookie["name"]
-            value = cookie["value"]
-
-            # Decode URL-encoded values
-            try:
-                decoded_value = urllib.parse.unquote(value)
-                print(f"Cookie {name}: {value} -> {decoded_value}")
-            except:
-                decoded_value = value
-                print(f"Cookie {name}: {value} (no decoding needed)")
-
-            cookie_pairs.append(f"{name}={decoded_value}")
-
-        # Step 3: Join all cookie pairs
-        cookie_header = "; ".join(cookie_pairs)
-        return cookie_header
-    except Exception as e:
-        print(f"Error parsing cookie json: {e}")
-        return None
-
-
-async def get_mentions():
-    """
-    Get followings for a specific user
-    Returns: {"username": true} format
-    """
-    try:
-        cookie_json = """[
+# Tracker Account Cookies
+cookie_json = """[
 {
     "domain": ".x.com",
     "expirationDate": 1757685913.860275,
@@ -286,7 +254,7 @@ async def get_mentions():
 }
 ]"""
 
-        cookie_json2 = """[
+cookie_json2 = """[
 {
     "domain": ".x.com",
     "expirationDate": 1757685907.18712,
@@ -513,7 +481,7 @@ async def get_mentions():
 ]
 """
 
-        cookie_json3 = """[
+cookie_json3 = """[
 {
     "domain": ".x.com",
     "expirationDate": 1757685913.860275,
@@ -768,6 +736,37 @@ async def get_mentions():
 ]
 """
 
+
+def parse_cookie_json(cookie_json: str):
+    try:
+        cookies = json.loads(cookie_json)
+
+        # Step 2: Extract name=value pairs and decode URL-encoded values
+        cookie_pairs = []
+        for cookie in cookies:
+            name = cookie["name"]
+            value = cookie["value"]
+
+            # Decode URL-encoded values
+            try:
+                decoded_value = urllib.parse.unquote(value)
+                print(f"Cookie {name}: {value} -> {decoded_value}")
+            except:
+                decoded_value = value
+                print(f"Cookie {name}: {value} (no decoding needed)")
+
+            cookie_pairs.append(f"{name}={decoded_value}")
+
+        # Step 3: Join all cookie pairs
+        cookie_header = "; ".join(cookie_pairs)
+        return cookie_header
+    except Exception as e:
+        print(f"Error parsing cookie json: {e}")
+        return None
+
+
+async def get_mentions():
+    try:
         print("parsing cookie json")
         cookies = parse_cookie_json(cookie_json)
         print("parsing cookie json2")
@@ -810,12 +809,10 @@ async def get_mentions():
         print("account added")
 
         print("getting target mention")
-        q = f"(@{mention_tracked_user}"
-        # Yesterday's date
-        yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
+        yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        q = f"(@{mention_tracked_user} since:{yesterday})"
         print(f"Getting mentions since {yesterday}")
-        # Use the Latest tab
         results = await gather(api.search(q, limit=100, kv={"product": "Latest"}))
 
         return results
@@ -964,7 +961,6 @@ import requests
 
 def create_tweet_with_rapid_api(tweet_id: str, tweet: str, media_id: str):
     try:
-
         data = {
             "tweet_text": tweet,
             "in_reply_to_tweet_id": tweet_id,

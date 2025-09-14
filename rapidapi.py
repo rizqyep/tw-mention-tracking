@@ -814,7 +814,7 @@ async def get_mentions():
         # Yesterday's date
         yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
-        print(f"Getting mentions from {yesterday} to {today}")
+        print(f"Getting mentions since {yesterday}")
         # Use the Latest tab
         results = await gather(api.search(q, limit=100, kv={"product": "Latest"}))
 

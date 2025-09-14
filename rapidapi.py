@@ -5,6 +5,7 @@ import tweepy
 from twscrape import API, Tweet, gather
 import tweetdb
 import time
+from datetime import datetime, timedelta
 
 mention_tracked_user = "aureliadotai"
 rapid_api_key = "14da4ca027msh1426d7eef136643p1f279cjsnfc7150db6cad"
@@ -810,9 +811,12 @@ async def get_mentions():
 
         print("getting target mention")
         q = f"(@{mention_tracked_user}"
+        # Yesterday's date
+        yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
 
+        print(f"Getting mentions from {yesterday} to {today}")
         # Use the Latest tab
-        results = await gather(api.search(q, limit=10, kv={"product": "Latest"}))
+        results = await gather(api.search(q, limit=100, kv={"product": "Latest"}))
 
         for tweet in results:
             # tweet is an SNScrape-like model

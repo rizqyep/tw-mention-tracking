@@ -51,8 +51,18 @@ def main():
     # schedule.every().day.at("09:00").do(run_mention_tracking)  # Daily at 9 AM
     # schedule.every().monday.do(run_mention_tracking)     # Every Monday
 
+    print(
+        """
+ █████╗ ██╗   ██╗██████╗ ███████╗██╗     ██╗ █████╗     █████╗ ██╗
+██╔══██╗██║   ██║██╔══██╗██╔════╝██║     ██║██╔══██╗   ██╔══██╗██║
+███████║██║   ██║██████╔╝█████╗  ██║     ██║███████║   ███████║██║
+██╔══██║██║   ██║██╔══██╗██╔══╝  ██║     ██║██╔══██║   ██╔══██║██║
+██║  ██║╚██████╔╝██║  ██║███████╗███████╗██║██║  ██║██╗██║  ██║██║
+╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝
+    """
+    )
+    print("Aurelia.AI - Mention Tracking Scheduler")
     print("Scheduler configured to run every 30 seconds")
-    print("Press Ctrl+C to stop the scheduler")
 
     # Run the scheduler
     try:

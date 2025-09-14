@@ -938,13 +938,12 @@ Most Important Rule: Do not exceed 120 characters when generating a reply!
 
 def get_tweet_id_from_mentioned_tweet(mentioned_tweet: Tweet):
     tweet_id = None
-    if mentioned_tweet.inReplyToTweetIdStr:
-        tweet_id = mentioned_tweet.inReplyToTweetIdStr
+    if mentioned_tweet.inReplyToTweetIdStr is not None:
+        return mentioned_tweet.inReplyToTweetIdStr
     elif mentioned_tweet.id_str:
-        tweet_id = mentioned_tweet.id_str
+        return mentioned_tweet.id_str
     else:
-        tweet_id = None
-    return tweet_id
+        return None
 
 
 import random

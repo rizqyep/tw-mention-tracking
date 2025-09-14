@@ -1003,6 +1003,7 @@ async def track_mention_and_reply():
         mentioned_tweets = sorted(mentioned_tweets, key=lambda x: x.date, reverse=True)
 
         for mentioned_tweet in mentioned_tweets:
+            print("--------------------------------")
             print(
                 f"Sender {mentioned_tweet.user.username} replied to {mention_tracked_user}"
             )

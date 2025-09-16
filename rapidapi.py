@@ -946,7 +946,18 @@ import random
 
 
 def get_random_media():
-    media_ids = ["1966151030372192256"]
+    media_ids = [
+        "1967925670316740609",
+        "1967925742739845121",
+        "1967925813317341187",
+        "1967925889896984576",
+        "1967925972063444992",
+        "1967926043823710208",
+        "1967926114275540992",
+        "1967926186329468928",
+        "1967926253039882241",
+        "1967926324099723264",
+    ]
     return random.choice(media_ids)
 
 
@@ -990,7 +1001,11 @@ async def track_mention_and_reply():
         print("getting mentions")
         mentioned_tweets = await get_mentions()
 
-        mentioned_tweets = sorted(mentioned_tweets, key=lambda x: x.date, reverse=True)
+        mentioned_tweets = (
+            sorted(mentioned_tweets, key=lambda x: x.date, reverse=True)
+            if isinstance(mentioned_tweets, list)
+            else []
+        )
 
         for mentioned_tweet in mentioned_tweets:
             print("--------------------------------")

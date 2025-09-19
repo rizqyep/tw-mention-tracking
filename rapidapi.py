@@ -6,7 +6,7 @@ from twscrape import API, Tweet, gather
 import tweetdb
 import time
 from datetime import datetime, timedelta
-
+from upload_random_media import upload_random_media
 
 # Credentials and target settings
 mention_tracked_user = "aureliadotai"
@@ -1029,7 +1029,7 @@ async def track_mention_and_reply():
             print("replying to tweet")
 
             print("uploading media")
-            media_id = get_random_media()
+            media_id = upload_random_media()
 
             create_tweet_with_rapid_api(tweet_id, comment, media_id)
             print("Tweet replied !")
@@ -1040,7 +1040,7 @@ async def track_mention_and_reply():
         print(f"Error in track_mention_and_reply: {e}")
 
 
-# if __name__ == "__main__":
-#     import asyncio
+if __name__ == "__main__":
+    import asyncio
 
-#     asyncio.run(track_mention_and_reply())
+    asyncio.run(track_mention_and_reply())

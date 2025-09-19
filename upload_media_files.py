@@ -2,6 +2,7 @@ import tweepy
 import requests
 import re
 import time
+import random
 
 tw_api_key = "fSK4IQjD8Ipg7fGey3EW3TAAL"
 tw_api_secret = "Q4iP2Mfm2U39FFCAbtd2rIzN2ZrYD0e0pPnRtqQZlmBZheXz9Z"

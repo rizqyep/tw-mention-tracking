@@ -171,5 +171,4 @@ cython_debug/
 .pypirc
 
 .env
-medias/
 *.db
